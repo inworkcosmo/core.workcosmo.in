@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workcosmo Core — HR Core Operations</title>
+    <meta name="description" content="Workcosmo Core: Employee database, company org chart, document storage, and corporate metadata.">
+    <link rel="icon" type="image/png" href="https://workcosmo.in/app/assets/images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <!-- Auth Loader -->
+    <div id="auth-loader" class="auth-loader">
+        <div class="loader-content">
+            <div class="loader-brand">
+                <img src="https://workcosmo.in/src/images/ngu_logo.png" alt="Workcosmo">
+                <span>Workcosmo Core</span>
+            </div>
+            <div class="loader-spinner"></div>
+            <p>Verifying your session...</p>
+        </div>
+    </div>
+
+    <!-- App Shell -->
+    <div id="app-shell" class="app-shell hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <a href="https://space.workcosmo.in" class="sidebar-brand">
+                    <img src="https://workcosmo.in/src/images/ngu_logo.png" alt="Workcosmo">
+                    <span>Core</span>
+                </a>
+
+                <nav class="sidebar-nav" id="sidebar-nav">
+                    <a href="#" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-grid-2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="employees">
+                        <i class="fas fa-id-badge"></i>
+                        <span>Employee Directory</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="org-chart">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Org Chart</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="documents">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Documents</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="settings">
+                        <i class="fas fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="https://space.workcosmo.in" class="nav-item back-to-space">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Space</span>
+                </a>
+                <div class="sidebar-user" id="sidebar-user">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="user-name" id="sidebar-user-name">User</span>
+                        <span class="user-role" id="sidebar-user-role">Member</span>
+                    </div>
+                    <button id="sign-out-btn" class="sign-out-btn" title="Sign out">
+                        <i class="fas fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p class="header-subtitle" id="header-subtitle">HR core operations</p>
+                </div>
+                <div class="header-right">
+                    <span class="company-badge" id="company-badge">Company</span>
+                </div>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <!-- Dashboard Section -->
+                <section id="section-dashboard" class="content-section active">
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon violet">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-value" id="metric-employees">14</span>
+                                <span class="metric-label">Total Employees</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon blue">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-value" id="metric-departments">4</span>
+                                <span class="metric-label">Departments</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon emerald">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-value" id="metric-new-hires">2</span>
+                                <span class="metric-label">New Hires (Month)</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon amber">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-value" id="metric-requests">3</span>
+                                <span class="metric-label">Active Requests</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card employee-overview">
+                            <div class="card-header">
+                                <h3>Team Directory Preview</h3>
+                                <span class="card-badge">Active</span>
+                            </div>
+                            <div class="employee-list">
+                                <div class="employee-item">
+                                    <div class="employee-avatar">AK</div>
+                                    <div class="employee-details">
+                                        <h4>Arun Kumar</h4>
+                                        <p>arun.kumar@company.com</p>
+                                    </div>
+                                    <div class="employee-meta">
+                                        <span class="employee-dept">Engineering</span>
+                                        <p class="employee-status">Backend Developer</p>
+                                    </div>
+                                </div>
+                                <div class="employee-item">
+                                    <div class="employee-avatar">PS</div>
+                                    <div class="employee-details">
+                                        <h4>Priya Sharma</h4>
+                                        <p>priya.sharma@company.com</p>
+                                    </div>
+                                    <div class="employee-meta">
+                                        <span class="employee-dept">Engineering</span>
+                                        <p class="employee-status">Tech Lead</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card recent-activity">
+                            <div class="card-header">
+                                <h3>Recent Events</h3>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-dot violet"></div>
+                                    <div class="activity-content">
+                                        <p><strong>Arun Kumar</strong> joined the team</p>
+                                        <span class="activity-time">2 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot blue"></div>
+                                    <div class="activity-content">
+                                        <p>Updated compliance policy document</p>
+                                        <span class="activity-time">4 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot amber"></div>
+                                    <div class="activity-content">
+                                        <p>Leave request submitted by <strong>Priya Sharma</strong></p>
+                                        <span class="activity-time">Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Employee Directory Section -->
+                <section id="section-employees" class="content-section">
+                    <div class="section-toolbar">
+                        <h2>Employee Directory</h2>
+                        <button class="primary-btn"><i class="fas fa-plus"></i> Add Employee</button>
+                    </div>
+                    <div class="table-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Job Title</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Arun Kumar</strong></td>
+                                    <td>Engineering</td>
+                                    <td>Backend Developer</td>
+                                    <td>arun.kumar@company.com</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Priya Sharma</strong></td>
+                                    <td>Engineering</td>
+                                    <td>Tech Lead</td>
+                                    <td>priya.sharma@company.com</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rahul Patel</strong></td>
+                                    <td>Product</td>
+                                    <td>Product Manager</td>
+                                    <td>rahul.patel@company.com</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Neha Joshi</strong></td>
+                                    <td>HR</td>
+                                    <td>HR Operations</td>
+                                    <td>neha.joshi@company.com</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Org Chart Section -->
+                <section id="section-org-chart" class="content-section">
+                    <div class="section-toolbar">
+                        <h2>Company Org Chart</h2>
+                    </div>
+                    <div class="card">
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class="fas fa-sitemap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                            <h4>Workspace Hierarchy</h4>
+                            <p style="color: var(--text-secondary); max-width: 400px; margin: 0.5rem auto 1.5rem;">Visual organization hierarchy is generated dynamically from reporting metadata.</p>
+                            <button class="primary-btn" style="margin: 0 auto;">Generate Tree View</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Documents Section -->
+                <section id="section-documents" class="content-section">
+                    <div class="section-toolbar">
+                        <h2>Corporate Documents</h2>
+                        <button class="primary-btn"><i class="fas fa-upload"></i> Upload File</button>
+                    </div>
+                    <div class="table-card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Title</th>
+                                    <th>Category</th>
+                                    <th>Size</th>
+                                    <th>Last Updated</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Employee Handbook 2026.pdf</strong></td>
+                                    <td>Policy</td>
+                                    <td>2.4 MB</td>
+                                    <td>Jun 01, 2026</td>
+                                    <td><a href="#" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IT Compliance Policy.docx</strong></td>
+                                    <td>Security</td>
+                                    <td>340 KB</td>
+                                    <td>May 24, 2026</td>
+                                    <td><a href="#" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="section-settings" class="content-section">
+                    <div class="section-toolbar">
+                        <h2>Settings</h2>
+                    </div>
+                    <div class="card">
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                                <div>
+                                    <strong>Aadhaar Verification</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Enforce Aadhaar card verification during employee onboarding.</p>
+                                </div>
+                                <input type="checkbox" checked style="width: 1.5rem; height: 1.5rem; accent-color: var(--primary-color);">
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem;">
+                                <div>
+                                    <strong>Org Chart Public Visibility</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Make organization charts visible to guest portal users.</p>
+                                </div>
+                                <input type="checkbox" style="width: 1.5rem; height: 1.5rem; accent-color: var(--primary-color);">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+</body>
+
+</html>
