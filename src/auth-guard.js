@@ -116,6 +116,19 @@ export function initAuthGuard(onSuccess) {
             }
             const company = companySnap.data();
 
+            // Verify Core module is enabled
+            const modulesEnabled = company.modulesEnabled || {};
+            const isCoreEnabled = Object.prototype.hasOwnProperty.call(modulesEnabled, "core")
+                ? modulesEnabled.core === true
+                : (Array.isArray(company.features) ? company.features.includes("coreModule") : false);
+
+            if (!isCoreEnabled) {
+                alert("The Core module is not enabled for this workspace.");
+                await signOut(auth);
+                window.location.href = `https://space.workcosmo.in?companyId=${userCompanyId}`;
+                return;
+            }
+
             // Store in Session
             sessionStorage.setItem("tenant_client_id", userCompanyId);
 
